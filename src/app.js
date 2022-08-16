@@ -28,11 +28,10 @@ const render = () => {
             <h1>{app.title}</h1>
             {app.subtitle && <p>{app.subtitle}</p>}
             <p>{app.options.length > 0 ? 'Options:' : 'No options'}</p>
-            <p>{app.options.length}</p>
             <button onClick={clearOptions}>Clear Options</button>
+
             <ol>
-                <li>Item one</li>
-                <li>Item two</li>
+                {app.options.map((option) => <li>{option}</li>)}
             </ol>
     
             <form onSubmit={addOption}>

@@ -44,11 +44,6 @@ var render = function render() {
             app.options.length > 0 ? 'Options:' : 'No options'
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length
-        ),
-        React.createElement(
             'button',
             { onClick: clearOptions },
             'Clear Options'
@@ -56,16 +51,13 @@ var render = function render() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'Item one'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item two'
-            )
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    null,
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',
