@@ -31,7 +31,7 @@ const render = () => {
             <button onClick={clearOptions}>Clear Options</button>
 
             <ol>
-                {app.options.map((option) => <li>{option}</li>)}
+                {app.options.map((option, i) => <li key={i}>{option}</li>)}
             </ol>
     
             <form onSubmit={addOption}>

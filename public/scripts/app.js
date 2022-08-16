@@ -51,10 +51,10 @@ var render = function render() {
         React.createElement(
             'ol',
             null,
-            app.options.map(function (option) {
+            app.options.map(function (option, i) {
                 return React.createElement(
                     'li',
-                    null,
+                    { key: i },
                     option
                 );
             })
