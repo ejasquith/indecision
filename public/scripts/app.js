@@ -1,67 +1,86 @@
 'use strict';
 
-console.log('App.js running!');
-
 var app = {
     title: 'Indecision',
     subtitle: 'Put your life in the hands of a computer',
-    options: ['One', 'Two']
+    options: []
 };
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        'p',
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? "Options:" : "No options"
-    )
-);
+var addOption = function addOption(e) {
+    e.preventDefault();
 
-var user = {
-    fname: 'Emily',
-    lname: 'Asquith',
-    age: 22,
-    location: 'Kendal, UK'
+    var option = e.target.elements.optionInput.value;
+
+    if (option) {
+        app.options.push(option);
+        e.target.elements.optionInput.value = '';
+    }
+
+    render();
 };
 
-var getLocation = function getLocation(user) {
-    return user.location && React.createElement(
-        'p',
+var clearOptions = function clearOptions(e) {
+    app.options = [];
+    render();
+};
+
+var render = function render() {
+    var template = React.createElement(
+        'div',
         null,
-        'Location: ',
-        user.location
+        React.createElement(
+            'h1',
+            null,
+            app.title
+        ),
+        app.subtitle && React.createElement(
+            'p',
+            null,
+            app.subtitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Options:' : 'No options'
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length
+        ),
+        React.createElement(
+            'button',
+            { onClick: clearOptions },
+            'Clear Options'
+        ),
+        React.createElement(
+            'ol',
+            null,
+            React.createElement(
+                'li',
+                null,
+                'Item one'
+            ),
+            React.createElement(
+                'li',
+                null,
+                'Item two'
+            )
+        ),
+        React.createElement(
+            'form',
+            { onSubmit: addOption },
+            React.createElement('input', { type: 'text', name: 'optionInput', id: 'optionInput' }),
+            React.createElement(
+                'button',
+                null,
+                'Add Option'
+            )
+        )
     );
-};
 
-var userInfoTemplate = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.fname ? user.fname : 'Anonymous',
-        ' ',
-        user.lname
-    ),
-    user.age >= 18 && React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.age
-    ),
-    getLocation(user)
-);
+    ReactDOM.render(template, appRoot);
+};
 
 var appRoot = document.getElementById('app');
-ReactDOM.render(template, appRoot);
+render();
