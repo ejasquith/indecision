@@ -19,9 +19,15 @@ var addOption = function addOption(e) {
     render();
 };
 
-var clearOptions = function clearOptions(e) {
+var clearOptions = function clearOptions() {
     app.options = [];
     render();
+};
+
+var chooseOption = function chooseOption() {
+    var randNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randNum];
+    alert(option);
 };
 
 var render = function render() {
@@ -42,6 +48,11 @@ var render = function render() {
             'p',
             null,
             app.options.length > 0 ? 'Options:' : 'No options'
+        ),
+        React.createElement(
+            'button',
+            { disabled: app.options.length === 0, onClick: chooseOption },
+            'What Should I Do?'
         ),
         React.createElement(
             'button',

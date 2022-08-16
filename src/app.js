@@ -17,10 +17,16 @@ const addOption = (e) => {
     render();
 };
 
-const clearOptions = (e) => {
+const clearOptions = () => {
     app.options = [];
     render();
-}
+};
+
+const chooseOption = () => {
+    const randNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randNum];
+    alert(option);
+};
 
 const render = () => {
     const template = (
@@ -28,6 +34,8 @@ const render = () => {
             <h1>{app.title}</h1>
             {app.subtitle && <p>{app.subtitle}</p>}
             <p>{app.options.length > 0 ? 'Options:' : 'No options'}</p>
+
+            <button disabled={app.options.length === 0} onClick={chooseOption}>What Should I Do?</button>
             <button onClick={clearOptions}>Clear Options</button>
 
             <ol>
